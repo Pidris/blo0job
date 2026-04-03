@@ -40,7 +40,7 @@ namespace arookas {
 				long start = reader.Position;
 				ushort typeID = reader.Read16(); // this is actually a peek in SMS, but fuck that
 
-				switch (typeID) {
+                switch (typeID) {
 					default: {
 						Console.WriteLine(">>> Unknown '{0:X4}' section at 0x{1:X6}", typeID, start);
 						return false;
@@ -85,7 +85,7 @@ namespace arookas {
 						break;
 					}
 				}
-			}
+            }
 		}
 
 		public static bloScreen loadBlo1(Stream stream) {
@@ -232,28 +232,26 @@ namespace arookas {
 			}
 
 			writer.Write16(cExitID);
-		}
+        }
 		static void saveCompact(bloPane pane, aBinaryWriter writer) {
-			var typeID = cPaneID;
+            var typeID = cPaneID;
 
-			if (pane is bloTextbox) {
-				typeID = cTextboxID;
-			} else if (pane is bloWindow) {
-				typeID = cWindowID;
-			} else if (pane is bloPicture) {
-				typeID = cPictureID;
-			}
+			if (pane is bloTextbox) typeID = cTextboxID;
+			if (pane is bloWindow) typeID = cWindowID;
+			if (pane is bloPicture) typeID = cPictureID;
 
 			writer.Write16(typeID);
-			pane.saveCompact(writer);
+            pane.saveCompact(writer);
 
 			if (pane.getChildPane() > 0) {
 				writer.Write16(cBeginID);
+				writer.Step(2);
 				foreach (var childpane in pane) {
 					saveCompact(childpane, writer);
 				}
 				writer.Write16(cEndID);
-			}
+                writer.Step(2);
+            }
 		}
 
 		public void saveBlo1(Stream stream) {

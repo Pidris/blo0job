@@ -202,9 +202,9 @@ namespace arookas {
 
 			writer.WritePadding(4, 0);
 
-			for (int i = 0; i < 4; ++i) {
+			/*for (int i = 0; i < 4; ++i) {
 				writer.Write32(mColors[i].rgba);
-			}
+			}*/
 		}
 		internal override void saveBlo1(aBinaryWriter writer) {
 			base.saveBlo1(writer);

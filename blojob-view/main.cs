@@ -42,7 +42,7 @@ namespace arookas {
 			var file = Path.GetFileName(input);
 
 			createFinder(path, null);
-			var screen = loadScreen(input, bloFormat.Blo1);
+			var screen = loadScreen(Path.GetFullPath(input), bloFormat.Compact);
 
 			if (screen == null) {
 				Console.WriteLine("Failed to load input file '{0}'", input);
@@ -54,7 +54,7 @@ namespace arookas {
 		static void doCommandLine(aCommandLine cmd) {
 			bool inputSet = false;
 			string input = null;
-			bloFormat format = bloFormat.Blo1;
+			bloFormat format = bloFormat.Compact;
 
 			var searchPaths = new List<string>(5);
 
@@ -69,7 +69,7 @@ namespace arookas {
 						}
 						inputSet = true;
 						input = param[0];
-						format = (param.Count >= 2 ? parseFormat(param[1]) : bloFormat.Blo1);
+						format = (param.Count >= 2 ? parseFormat(param[1]) : bloFormat.Compact);
 						break;
 					}
 					case "-search-paths": {
