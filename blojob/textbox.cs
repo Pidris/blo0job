@@ -43,11 +43,14 @@ namespace arookas {
 			mTopColor = new bloColor(reader.Read32());
 			mBottomColor = new bloColor(reader.Read32());
 
-			int hbinding = reader.Read8();
-			mHBinding = (bloTextboxHBinding)(hbinding & 127);
+			//int hbinding = reader.Read8();
+			//mHBinding = (bloTextboxHBinding)(hbinding & 127);
+			//mVBinding = (bloTextboxVBinding)reader.Read8();
+
+			mHBinding = (bloTextboxHBinding)reader.Read8();
 			mVBinding = (bloTextboxVBinding)reader.Read8();
 
-			if ((hbinding & 0x80) != 0) {
+			if (((int)mHBinding & 0x80) != 0) {
 				mFontSpacing = reader.ReadS16();
 				mFontLeading = reader.ReadS16();
 				mFontWidth = reader.Read16();
@@ -165,7 +168,7 @@ namespace arookas {
 			writer.Write32(mTopColor.rgba);
 			writer.Write32(mBottomColor.rgba);
 
-			byte binding = 0;
+			/*byte binding = 0;
 			if (mFont != null) {
 				binding |= 1;
 				binding <<= 2;
@@ -173,7 +176,10 @@ namespace arookas {
 			binding |= (byte)mHBinding;
 			binding <<= 2;
 			binding |= (byte)mVBinding;
-			writer.Write8(binding);
+			writer.Write8(binding);*/
+
+			writer.Write8((byte)mHBinding);
+			writer.Write8((byte)mVBinding);
 
 			if (mFont != null) {
 				writer.WriteS16((short)mFontSpacing);

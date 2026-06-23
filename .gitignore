@@ -5,6 +5,7 @@
 *.suo
 obj/
 bin/
+.vs/
 
 # executables
 *.bat

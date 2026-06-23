@@ -52,9 +52,9 @@ namespace arookas {
 	}
 
 	public enum bloTextboxHBinding {
-		Center,
-		Right,
-		Left,
+		Center = 130,
+		Right = 131,
+		Left = 132,
 	}
 
 	public enum bloTextboxVBinding {
